@@ -1,0 +1,612 @@
+{
+  "fields": [
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "Amount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "BankAccountNumber",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "CheckAmount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "CountyTaxAmount",
+      "type": "string"
+    },
+    {
+      "name": "DeductionAddonList",
+      "type": {
+        "items": {
+          "fields": [
+            {
+              "encrypt": {
+                "key": "GeneratedKey",
+                "wrapping.key": "RSAKey",
+                "wrapping.key.provider.name": "azure_provider"
+              },
+              "name": "Amount",
+              "type": "string"
+            },
+            {
+              "encrypt": {
+                "key": "GeneratedKey",
+                "wrapping.key": "RSAKey",
+                "wrapping.key.provider.name": "azure_provider"
+              },
+              "name": "YtdAmount",
+              "type": "string"
+            }
+          ],
+          "name": "DeductionAddon",
+          "type": "record"
+        },
+        "type": "array"
+      }
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "DepositAmount",
+      "type": "string"
+    },
+    {
+      "default": null,
+      "name": "DirectDepositList",
+      "type": [
+        "null",
+        {
+          "items": {
+            "fields": [
+              {
+                "encrypt": {
+                  "key": "GeneratedKey",
+                  "wrapping.key": "RSAKey",
+                  "wrapping.key.provider.name": "azure_provider"
+                },
+                "name": "BankAccountNumber",
+                "type": "string"
+              },
+              {
+                "encrypt": {
+                  "key": "GeneratedKey",
+                  "wrapping.key": "RSAKey",
+                  "wrapping.key.provider.name": "azure_provider"
+                },
+                "name": "DepositAmount",
+                "type": "string"
+              }
+            ],
+            "name": "DirectDeposit",
+            "type": "record"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "FederalIncomeTaxAmount",
+      "type": "string"
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "FedExemptions",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "GrossEarnings",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "Hours",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "HoursBalance",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "HoursThisCheck",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "LocalTaxAmount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "MedicareAmount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "NetAmount",
+      "type": "string"
+    },
+    {
+      "name": "OtherEarningsList",
+      "type": {
+        "items": {
+          "fields": [
+            {
+              "encrypt": {
+                "key": "GeneratedKey",
+                "wrapping.key": "RSAKey",
+                "wrapping.key.provider.name": "azure_provider"
+              },
+              "name": "Amount",
+              "type": "string"
+            }
+          ],
+          "name": "OtherEarnings",
+          "type": "record"
+        },
+        "type": "array"
+      }
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "Rate",
+      "type": "string"
+    },
+    {
+      "name": "RegularEarningsList",
+      "type": {
+        "items": {
+          "fields": [
+            {
+              "encrypt": {
+                "key": "GeneratedKey",
+                "wrapping.key": "RSAKey",
+                "wrapping.key.provider.name": "azure_provider"
+              },
+              "name": "Amount",
+              "type": "string"
+            },
+            {
+              "encrypt": {
+                "key": "GeneratedKey",
+                "wrapping.key": "RSAKey",
+                "wrapping.key.provider.name": "azure_provider"
+              },
+              "name": "Hours",
+              "type": "string"
+            },
+            {
+              "encrypt": {
+                "key": "GeneratedKey",
+                "wrapping.key": "RSAKey",
+                "wrapping.key.provider.name": "azure_provider"
+              },
+              "name": "Rate",
+              "type": "string"
+            }
+          ],
+          "name": "RegularEarnings",
+          "type": "record"
+        },
+        "type": "array"
+      }
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "ResidentStateDisabilityTaxAmount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "ResidentStateIncomeTaxAmount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "ResidentStateWorkersCompTaxAmount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "SocialSecurityAmount",
+      "type": "string"
+    },
+    {
+      "default": null,
+      "name": "TaxList",
+      "type": [
+        "null",
+        {
+          "items": {
+            "fields": [
+              {
+                "encrypt": {
+                  "key": "GeneratedKey",
+                  "wrapping.key": "RSAKey",
+                  "wrapping.key.provider.name": "azure_provider"
+                },
+                "name": "CheckAmount",
+                "type": "string"
+              },
+              {
+                "encrypt": {
+                  "key": "GeneratedKey",
+                  "wrapping.key": "RSAKey",
+                  "wrapping.key.provider.name": "azure_provider"
+                },
+                "name": "YtdAmount",
+                "type": "string"
+              }
+            ],
+            "name": "Taxes",
+            "type": "record"
+          },
+          "type": "array"
+        }
+      ]
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "TotalAddonAmount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "TotalDeductionAmount",
+      "type": "string"
+    },
+    {
+      "name": "VacationHolidaySickList",
+      "type": {
+        "items": {
+          "fields": [
+            {
+              "encrypt": {
+                "key": "GeneratedKey",
+                "wrapping.key": "RSAKey",
+                "wrapping.key.provider.name": "azure_provider"
+              },
+              "name": "HoursBalance",
+              "type": "string"
+            },
+            {
+              "encrypt": {
+                "key": "GeneratedKey",
+                "wrapping.key": "RSAKey",
+                "wrapping.key.provider.name": "azure_provider"
+              },
+              "name": "HoursThisCheck",
+              "type": "string"
+            }
+          ],
+          "name": "VacationHolidaySick",
+          "type": "record"
+        },
+        "type": "array"
+      }
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "WorkStateDisabilityTaxAmount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "WorkStateIncomeTaxAmount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "WorkStateWorkersCompTaxAmount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdAddonAmount",
+      "type": "string"
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdAmount",
+      "type": "string"
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdCountyTaxAmount",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdDeductionAmount",
+      "type": "string"
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdFederalIncomeTaxAmount",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdGrossEarnings",
+      "type": "string"
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdLocalTaxAmount",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdMedicareAmount",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdNetAmount",
+      "type": "string"
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdResidentStateDisabilityTaxAmount",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdResidentStateIncomeTaxAmount",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdResidentStateWorkersCompTaxAmount",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdSocialSecurityAmount",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdTaxAmount",
+      "type": "string"
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdWorkStateDisabilityTaxAmount",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdWorkStateIncomeTaxAmount",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "default": null,
+      "encrypt": {
+        "key": "GeneratedKey",
+        "wrapping.key": "RSAKey",
+        "wrapping.key.provider.name": "azure_provider"
+      },
+      "name": "YtdWorkStateWorkersCompTaxAmount",
+      "type": [
+        "null",
+        "string"
+      ]
+    }
+  ],
+  "name": "SpectrumEncryptedPrCheckFields",
+  "namespace": "Erp.Spectrum.Encrypted",
+  "type": "record"
+}

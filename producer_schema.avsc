@@ -1,0 +1,305 @@
+{
+  "namespace": "com.csfleExample",
+  "type": "record",
+  "name": "PayrollData",
+  "fields": [
+    {
+      "name": "Amount",
+      "type": "string"
+    },
+    {
+      "name": "BankAccountNumber",
+      "type": "string"
+    },
+    {
+      "name": "CheckAmount",
+      "type": "string"
+    },
+    {
+      "name": "CountyTaxAmount",
+      "type": "string"
+    },
+    {
+      "name": "DeductionAddonList",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "DeductionAddon",
+          "type": "record",
+          "fields": [
+            {
+              "name": "Amount",
+              "type": "string"
+            },
+            {
+              "name": "YtdAmount",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "DepositAmount",
+      "type": "string"
+    },
+    {
+      "name": "DirectDepositList",
+      "type": ["null", {
+        "type": "array",
+        "items": {
+          "name": "DirectDeposit",
+          "type": "record",
+          "fields": [
+            {
+              "name": "BankAccountNumber",
+              "type": "string"
+            },
+            {
+              "name": "DepositAmount",
+              "type": "string"
+            }
+          ]
+        }
+      }],
+      "default": null
+    },
+    {
+      "name": "FederalIncomeTaxAmount",
+      "type": "string"
+    },
+    {
+      "name": "FedExemptions",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "GrossEarnings",
+      "type": "string"
+    },
+    {
+      "name": "Hours",
+      "type": "string"
+    },
+    {
+      "name": "HoursBalance",
+      "type": "string"
+    },
+    {
+      "name": "HoursThisCheck",
+      "type": "string"
+    },
+    {
+      "name": "LocalTaxAmount",
+      "type": "string"
+    },
+    {
+      "name": "MedicareAmount",
+      "type": "string"
+    },
+    {
+      "name": "NetAmount",
+      "type": "string"
+    },
+    {
+      "name": "OtherEarningsList",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "OtherEarnings",
+          "type": "record",
+          "fields": [
+            {
+              "name": "Amount",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Rate",
+      "type": "string"
+    },
+    {
+      "name": "RegularEarningsList",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "RegularEarnings",
+          "type": "record",
+          "fields": [
+            {
+              "name": "Amount",
+              "type": "string"
+            },
+            {
+              "name": "Hours",
+              "type": "string"
+            },
+            {
+              "name": "Rate",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "ResidentStateDisabilityTaxAmount",
+      "type": "string"
+    },
+    {
+      "name": "ResidentStateIncomeTaxAmount",
+      "type": "string"
+    },
+    {
+      "name": "ResidentStateWorkersCompTaxAmount",
+      "type": "string"
+    },
+    {
+      "name": "SocialSecurityAmount",
+      "type": "string"
+    },
+    {
+      "name": "TaxList",
+      "type": ["null", {
+        "type": "array",
+        "items": {
+          "name": "Taxes",
+          "type": "record",
+          "fields": [
+            {
+              "name": "CheckAmount",
+              "type": "string"
+            },
+            {
+              "name": "YtdAmount",
+              "type": "string"
+            }
+          ]
+        }
+      }],
+      "default": null
+    },
+    {
+      "name": "TotalAddonAmount",
+      "type": "string"
+    },
+    {
+      "name": "TotalDeductionAmount",
+      "type": "string"
+    },
+    {
+      "name": "VacationHolidaySickList",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "VacationHolidaySick",
+          "type": "record",
+          "fields": [
+            {
+              "name": "HoursBalance",
+              "type": "string"
+            },
+            {
+              "name": "HoursThisCheck",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "WorkStateDisabilityTaxAmount",
+      "type": "string"
+    },
+    {
+      "name": "WorkStateIncomeTaxAmount",
+      "type": "string"
+    },
+    {
+      "name": "WorkStateWorkersCompTaxAmount",
+      "type": "string"
+    },
+    {
+      "name": "YtdAddonAmount",
+      "type": "string"
+    },
+    {
+      "name": "YtdAmount",
+      "type": "string"
+    },
+    {
+      "name": "YtdCountyTaxAmount",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "YtdDeductionAmount",
+      "type": "string"
+    },
+    {
+      "name": "YtdFederalIncomeTaxAmount",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "YtdGrossEarnings",
+      "type": "string"
+    },
+    {
+      "name": "YtdLocalTaxAmount",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "YtdMedicareAmount",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "YtdNetAmount",
+      "type": "string"
+    },
+    {
+      "name": "YtdResidentStateDisabilityTaxAmount",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "YtdResidentStateIncomeTaxAmount",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "YtdResidentStateWorkersCompTaxAmount",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "YtdSocialSecurityAmount",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "YtdTaxAmount",
+      "type": "string"
+    },
+    {
+      "name": "YtdWorkStateDisabilityTaxAmount",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "YtdWorkStateIncomeTaxAmount",
+      "type": ["null", "string"],
+      "default": null
+    },
+    {
+      "name": "YtdWorkStateWorkersCompTaxAmount",
+      "type": ["null", "string"],
+      "default": null
+    }
+  ]
+}
