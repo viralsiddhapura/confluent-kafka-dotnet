@@ -28,3 +28,4 @@ core
 
 # Local configuration files with sensitive data
 *.local.properties
+kafka-consumer.properties
