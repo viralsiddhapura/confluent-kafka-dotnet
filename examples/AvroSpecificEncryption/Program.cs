@@ -58,22 +58,30 @@ namespace Confluent.Kafka.Examples.AvroSpecificEncryption
 
             var producerConfig = new ProducerConfig
             {
-                BootstrapServers = bootstrapServers
+                BootstrapServers = bootstrapServers,
+                SecurityProtocol = SecurityProtocol.SaslSsl,
+                SaslMechanism = SaslMechanism.Plain,
+                SaslUsername = "EQDLJQXRGBIWJJRR",
+                SaslPassword = "vGHzogE2dBHP6idXcwFBzQ1huXn97/zJcUrmL9iuX5AM9P9En6wi/kR+LAiA52P3"
             };
 
             var schemaRegistryConfig = new SchemaRegistryConfig
             {
-                // Note: you can specify more than one schema registry url using the
-                // schema.registry.url property for redundancy (comma separated list). 
-                // The property name is not plural to follow the convention set by
-                // the Java implementation.
-                Url = schemaRegistryUrl
+                Url = schemaRegistryUrl,
+                BasicAuthUserInfo = "AEJ537TD3OGJLXS5:Y6SzZHakEKVzZIbP7QqtEyez6WRTKIfxARlnVlqpx6hxpDrmhCtKfjf5/iszoHrP"
             };
 
             var consumerConfig = new ConsumerConfig
             {
                 BootstrapServers = bootstrapServers,
-                GroupId = "avro-specific-example-group"
+                GroupId = "avro-specific-example-group-v5",
+                SecurityProtocol = SecurityProtocol.SaslSsl,
+                SaslMechanism = SaslMechanism.Plain,
+                SaslUsername = "EQDLJQXRGBIWJJRR",
+                SaslPassword = "vGHzogE2dBHP6idXcwFBzQ1huXn97/zJcUrmL9iuX5AM9P9En6wi/kR+LAiA52P3",
+                AutoOffsetReset = AutoOffsetReset.Earliest,
+                EnableAutoCommit = true,
+                // Debug = "consumer,topic,msg"  // Commented out to reduce noise
             };
 
             var avroSerializerConfig = new AvroSerializerConfig
@@ -83,9 +91,9 @@ namespace Confluent.Kafka.Examples.AvroSpecificEncryption
                 // optional Avro serializer properties:
                 BufferBytes = 100
             };
-            // KMS properties can be passed as follows
-            // avroSerializerConfig.Set("rules.secret.access.key", "xxx");
-            // avroSerializerConfig.Set("rules.access.key.id", "xxx");
+            // AWS credentials will be picked up from environment variables or AWS CLI
+            // avroSerializerConfig.Set("rules.secret.access.key", "your-secret-key");
+            // avroSerializerConfig.Set("rules.access.key.id", "your-access-key");
 
             RuleSet ruleSet = new RuleSet(new List<Rule>(),
                 new List<Rule>
@@ -98,6 +106,7 @@ namespace Confluent.Kafka.Examples.AvroSpecificEncryption
                         ["encrypt.kek.name"] = kekName,
                         ["encrypt.kms.type"] = kmsType,
                         ["encrypt.kms.key.id"] = kmsKeyId,
+                        ["encrypt.dek.algorithm"] = "AES256_SIV"
                     }, null, null, "ERROR,NONE", false)
                 }
             );
@@ -106,15 +115,19 @@ namespace Confluent.Kafka.Examples.AvroSpecificEncryption
             CancellationTokenSource cts = new CancellationTokenSource();
             var consumeTask = Task.Run(() =>
             {
-                using (var schemaRegistry = new CachedSchemaRegistryClient(schemaRegistryConfig))
-                using (var consumer =
-                    new ConsumerBuilder<string, User>(consumerConfig)
-                        .SetValueDeserializer(new AvroDeserializer<User>(schemaRegistry).AsSyncOverAsync())
-                        .SetErrorHandler((_, e) => Console.WriteLine($"Error: {e.Reason}"))
-                        .Build())
+                Console.WriteLine("DEBUG: Starting consumer task...");
+                try
                 {
-
-                    consumer.Subscribe(topicName);
+                    using (var schemaRegistry = new CachedSchemaRegistryClient(schemaRegistryConfig))
+                    using (var consumer =
+                        new ConsumerBuilder<string, User>(consumerConfig)
+                            .SetValueDeserializer(new AvroDeserializer<User>(schemaRegistry).AsSyncOverAsync())
+                            .SetErrorHandler((_, e) => Console.WriteLine($"CONSUMER Error: {e.Reason}"))
+                            .Build())
+                    {
+                        Console.WriteLine($"DEBUG: Consumer created, subscribing to topic: {topicName}");
+                        consumer.Subscribe(topicName);
+                        Console.WriteLine("DEBUG: Consumer subscribed, waiting for messages...");
 
                     try
                     {
@@ -122,20 +135,49 @@ namespace Confluent.Kafka.Examples.AvroSpecificEncryption
                         {
                             try
                             {
-                                var consumeResult = consumer.Consume(cts.Token);
+                                // Console.WriteLine("DEBUG: Attempting to consume message...");
+                                var consumeResult = consumer.Consume(TimeSpan.FromSeconds(1));
+                                
+                                if (consumeResult == null)
+                                {
+                                    // Console.WriteLine("DEBUG: No message received, continuing...");
+                                    continue;
+                                }
+                                
+                                Console.WriteLine($"DEBUG: Message consumed from partition {consumeResult.Partition}, offset {consumeResult.Offset}");
+                                
                                 var user = consumeResult.Message.Value;
+                                Console.WriteLine($"DEBUG: Deserialized user object: {user}");
                                 Console.WriteLine($"key: {consumeResult.Message.Key}, user name: {user.name}, favorite number: {user.favorite_number}, favorite color: {user.favorite_color}, hourly_rate: {user.hourly_rate}");
                             }
                             catch (ConsumeException e)
                             {
-                                Console.WriteLine($"Consume error: {e.Error.Reason}");
+                                Console.WriteLine($"CONSUMER ERROR: {e.Error.Reason}");
+                                if (e.Error.Reason.Contains("deserialization"))
+                                {
+                                    Console.WriteLine("SCHEMA MISMATCH - Skipping old message with incompatible schema");
+                                    Console.WriteLine($"Partition: {e.ConsumerRecord?.TopicPartition}, Offset: {e.ConsumerRecord?.Offset}");
+                                    // Continue processing - don't stop on old messages
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"DEBUG: Unexpected error: {ex.Message}");
+                                Console.WriteLine($"DEBUG: Stack trace: {ex.StackTrace}");
                             }
                         }
                     }
                     catch (OperationCanceledException)
                     {
+                        Console.WriteLine("DEBUG: Consumer cancelled, closing...");
                         consumer.Close();
                     }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"DEBUG: Consumer task exception: {ex.Message}");
+                    Console.WriteLine($"DEBUG: Stack trace: {ex.StackTrace}");
                 }
             });
 
@@ -145,7 +187,8 @@ namespace Confluent.Kafka.Examples.AvroSpecificEncryption
                     .SetValueSerializer(new AvroSerializer<User>(schemaRegistry, avroSerializerConfig))
                     .Build())
             {
-                schemaRegistry.RegisterSchemaAsync(subjectName, schema, true);
+                // Schema already registered in Confluent Cloud UI
+                // schemaRegistry.RegisterSchemaAsync(subjectName, schema, true);
                     
                 Console.WriteLine($"{producer.Name} producing on {topicName}. Enter user names, q to exit.");
 
@@ -154,6 +197,8 @@ namespace Confluent.Kafka.Examples.AvroSpecificEncryption
                 while ((text = Console.ReadLine()) != "q")
                 {
                     User user = new User { name = text, favorite_color = "green", favorite_number = ++i, hourly_rate = new Avro.AvroDecimal(67.99) };
+                    Console.WriteLine($"DEBUG: Creating user object - name: {user.name}, favorite_number: {user.favorite_number}");
+                    
                     producer
                         .ProduceAsync(topicName, new Message<string, User> { Key = text, Value = user })
                         .ContinueWith(task =>
