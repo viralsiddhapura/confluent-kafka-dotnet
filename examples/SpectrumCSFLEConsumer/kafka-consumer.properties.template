@@ -1,0 +1,28 @@
+bootstrap.servers=YOUR_BOOTSTRAP_SERVERS
+
+group.id=payroll-csfle-consumer-group
+auto.offset.reset=Earliest
+
+security.protocol=SaslSsl
+sasl.mechanism=Plain
+sasl.username=YOUR_CONFLUENT_API_KEY
+sasl.password=YOUR_CONFLUENT_API_SECRET
+
+# Topic configuration
+topic.name=payroll-data
+
+# Schema Registry configuration
+schema.registry.url=YOUR_SCHEMA_REGISTRY_URL
+schema.registry.basic.auth.user.info=YOUR_SR_API_KEY:YOUR_SR_API_SECRET
+
+encrypt.kek.name=csfle-payroll-key
+encrypt.kms.type=aws-kms
+encrypt.kms.key.id=YOUR_AWS_KMS_KEY_ARN
+
+# Optional: AWS KMS configuration (can also use IAM roles or AWS CLI profiles)
+rules.access.key.id=YOUR_AWS_ACCESS_KEY_ID
+rules.secret.access.key=YOUR_AWS_SECRET_ACCESS_KEY
+# aws.region=us-east-1
+
+# Avro deserializer configuration
+use.latest.version=true

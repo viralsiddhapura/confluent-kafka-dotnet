@@ -25,3 +25,6 @@ core
 
 *coverage.xml
 .DS_Store
+
+# Local configuration files with sensitive data
+*.local.properties
