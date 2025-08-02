@@ -141,7 +141,7 @@ namespace Confluent.Kafka.Examples.SpectrumCSFLEConsumer
                 cts.Cancel();
             };
 
-            var consumeTask = Task.Run(() =>
+            var consumeTask = Task.Run(async() =>
             {
                 Console.WriteLine("DEBUG: Starting Spectrum CSFLE Consumer task...");
                 try
